@@ -134,6 +134,10 @@ input[type="text"]:focus { outline: none; border-color: var(--orange); box-shado
 }
 .btn.choice:hover { border-color: var(--orange); }
 .btn.choice.on { background: var(--navy); color: #fff; border-color: var(--navy); }
+.btn.ghost.danger { color: var(--danger); border-color: #e3b9b5; }
+.btn.ghost.danger:hover { border-color: var(--danger); }
+.resume-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 6px; }
+.resume-actions .btn.primary { margin: 0; }
 .err { color: var(--danger); font-weight: 600; font-size: .92rem; }
 .yesno { display: flex; gap: 10px; flex-wrap: wrap; }
 
@@ -248,7 +252,8 @@ select {
 
 .foot { text-align: center; color: var(--muted); font-size: .82rem; padding: 0 16px 24px; }
 .foot .credit { font-size: .95rem; color: var(--navy); font-weight: 600; margin-bottom: 4px; }
-.foot .credit b { color: var(--orange-d); }
+.foot .credit-name { font-size: .9rem; color: var(--navy); margin-bottom: 6px; }
+.foot .credit-name b { color: var(--orange-d); }
 .foot .heart { color: var(--orange); }
 
 /* =======================================================

@@ -98,16 +98,6 @@ const COURSES = [
     lectures: [{ day: "wed", from: 7, to: 8, who: "د/ سارة رضوان", room: "مدرج 1" }],
     sections: [],
   },
-  {
-    id: "linear-algebra", level: 1, src: "secnet",
-    ar: "جبر خطي", short: "جبر خطي", en: "Linear Algebra",
-    note: "من جدول أمن المعلومات / الشبكات (المستوى الثاني عندهم)",
-    lectures: [{ day: "thu", from: 1, to: 3, who: "د/ رضا جمال", room: "مدرج 2" }],
-    sections: [
-      opt("الأحد — مجموعات أمن المعلومات 1، 2", [{ day: "sun", from: 9, to: 12, who: "م/ آلاء إبراهيم", room: "قاعة 3" }]),
-      opt("الأربعاء — مجموعات أمن المعلومات 3، 4 والشبكات", [{ day: "wed", from: 4, to: 6, who: "م/ آلاء إبراهيم", room: "قاعة 5" }]),
-    ],
-  },
 
   /* ===================== المستوى الثاني ===================== */
   {
@@ -160,6 +150,16 @@ const COURSES = [
         { day: "sun", from: 5, to: 6, who: "م/ محمد مصطفى", room: "معمل تصميم منطقي 1", kind: "عملي" },
         { day: "mon", from: 5, to: 6, who: "م/ مصطفى سامي", room: "قاعة 11", kind: "تمارين" },
       ]),
+    ],
+  },
+  {
+    id: "linear-algebra", level: 2, src: "secnet",
+    ar: "جبر خطي", short: "جبر خطي", en: "Linear Algebra",
+    note: "من جدول أمن المعلومات / الشبكات (المستوى الثاني)",
+    lectures: [{ day: "thu", from: 1, to: 3, who: "د/ رضا جمال", room: "مدرج 2" }],
+    sections: [
+      opt("الأحد — مجموعات أمن المعلومات 1، 2", [{ day: "sun", from: 9, to: 12, who: "م/ آلاء إبراهيم", room: "قاعة 3" }]),
+      opt("الأربعاء — مجموعات أمن المعلومات 3، 4 والشبكات", [{ day: "wed", from: 4, to: 6, who: "م/ آلاء إبراهيم", room: "قاعة 5" }]),
     ],
   },
   {

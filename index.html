@@ -30,6 +30,18 @@
       <li data-step="4"><span class="dot">4</span><span class="lbl">المعاينة والتصدير</span></li>
     </ol>
 
+    <!-- ========== الرجوع لجدول محفوظ ========== -->
+    <section class="card step resume" id="resume" hidden>
+      <h1 class="hero-title">أهلا <span id="resumeName"></span> 👋</h1>
+      <p class="hero-sub">جدولك اللي عملته قبل كده محفوظ على الجهاز ده: <b id="resumeInfo"></b></p>
+      <div class="resume-actions">
+        <button class="btn primary big" id="resumeView">عرض جدولي وتحميله</button>
+        <button class="btn ghost" id="resumeEdit">تعديل جدولي</button>
+        <button class="btn ghost danger" id="resumeNew">إنشاء جدول جديد</button>
+      </div>
+      <p class="hint">«إنشاء جدول جديد» يمسح الجدول المحفوظ ويبدأ من الأول.</p>
+    </section>
+
     <!-- ========== الخطوة 1 ========== -->
     <section class="card step" id="step1">
       <h1 class="hero-title">اصنع جدولك الأسبوعي</h1>
@@ -121,6 +133,7 @@
       <div class="actions">
         <button class="btn ghost" data-go="3">→ رجوع</button>
         <button class="btn ghost" id="printBtn">طباعة</button>
+        <button class="btn ghost danger" id="newSchedule">إنشاء جدول جديد</button>
         <button class="btn primary big" id="pdfBtn">تحميل PDF</button>
       </div>
       <p class="hint center" id="pdfStatus"></p>
@@ -128,7 +141,8 @@
   </main>
 
   <footer class="foot">
-    <div class="credit">صنع بحب <span class="heart">♥</span> بواسطة الطالب <b dir="ltr">omarxddz</b></div>
+    <div class="credit">صنع بحب <span class="heart">♥</span> في بنها</div>
+    <div class="credit-name"><b dir="ltr">omarxddz</b></div>
     <div>المواعيد مأخوذة من الجدول الرسمي للفصل الأول 2026 / 2027، راجع أي موعد مع دكتور المادة.</div>
   </footer>
 

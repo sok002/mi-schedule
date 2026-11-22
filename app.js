@@ -13,7 +13,19 @@
   const STORE_KEY = "mi-schedule-v1";
 
   /* ---------------- الحالة ---------------- */
+  const freshState = () => ({
+    step: 1,
+    name: "",
+    level: null,
+    seededLevel: null,
+    tab: null,
+    selected: {},
+    changes: {},
+    answered: false,
+    done: false,   // وصل لمرحلة المعاينة مرة على الأقل
+  });
   let state = {
+    done: false,
     step: 1,
     name: "",
     level: null,
@@ -80,6 +92,8 @@
   /* ---------------- التنقل ---------------- */
   function go(step) {
     state.step = step;
+    if (step === 4) state.done = true;
+    $("#stepper").hidden = false;
     $$(".step").forEach((el) => (el.hidden = el.id !== "step" + step));
     $$("#stepper li").forEach((li) => {
       const n = +li.dataset.step;
@@ -473,6 +487,33 @@
   });
   window.addEventListener("afterprint", () => { $("#printHost").innerHTML = ""; });
 
+  /* ---------------- الرجوع لجدول محفوظ / جدول جديد ---------------- */
+  function showResume() {
+    const n = Object.keys(state.selected).length;
+    const lv = LEVELS.find((l) => l.n === state.level);
+    $("#resumeName").textContent = state.name || "";
+    $("#resumeInfo").textContent = `${n} ${n > 2 && n <= 10 ? "مواد" : "مادة"}${lv ? " — " + lv.ar : ""}`;
+    $("#stepper").hidden = true;
+    $$(".step").forEach((el) => (el.hidden = el.id !== "resume"));
+  }
+
+  function startNew() {
+    state = freshState();
+    save();
+    nameInput.value = "";
+    $("#yesChange").classList.remove("on");
+    $("#noChange").classList.remove("on");
+    renderLevelPick();
+    go(1);
+    nameInput.focus();
+  }
+
+  $("#resumeView").addEventListener("click", () => go(4));
+  $("#resumeEdit").addEventListener("click", () => go(2));
+  $("#resumeNew").addEventListener("click", startNew);
+  $("#newSchedule").addEventListener("click", startNew);
+
   /* ---------------- البداية ---------------- */
-  go(1);
+  if (state.done && Object.keys(state.selected).length) showResume();
+  else go(1);
 })();
