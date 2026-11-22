@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>جدولي الأسبوعي — Medical Informatics Program</title>
+  <meta name="description" content="اصنع جدول محاضراتك وسكاشنك الأسبوعي وصدره PDF — برنامج المعلوماتية الطبية، كلية الحاسبات والذكاء الاصطناعي، جامعة بنها">
+  <link rel="icon" href="assets/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Noto+Naskh+Arabic:wght@400;700&family=Tinos:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <img src="assets/logo.jpg" alt="شعار كلية الحاسبات والذكاء الاصطناعي — جامعة بنها" class="logo">
+      <div class="brand">
+        <div class="brand-en">Medical Informatics Program</div>
+        <div class="brand-ar">برنامج المعلوماتية الطبية الذكية — كلية الحاسبات والذكاء الاصطناعي، جامعة بنها</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <ol class="stepper" id="stepper">
+      <li data-step="1"><span class="dot">1</span><span class="lbl">بياناتك</span></li>
+      <li data-step="2"><span class="dot">2</span><span class="lbl">المواد</span></li>
+      <li data-step="3"><span class="dot">3</span><span class="lbl">تغيير المواعيد</span></li>
+      <li data-step="4"><span class="dot">4</span><span class="lbl">المعاينة والتصدير</span></li>
+    </ol>
+
+    <!-- ========== الخطوة 1 ========== -->
+    <section class="card step" id="step1">
+      <h1 class="hero-title">اصنع جدولك الأسبوعي</h1>
+      <p class="hero-sub">اختر موادك، عدل أي موعد اتغير بالاتفاق مع الدكتور أو المعيد، وحمل جدولك PDF جاهز للطباعة.</p>
+
+      <label class="field">
+        <span class="field-label">اسمك</span>
+        <input type="text" id="studentName" autocomplete="name" placeholder="اكتب اسمك كما تحب أن يظهر في الجدول">
+      </label>
+
+      <div class="field">
+        <span class="field-label">المستوى</span>
+        <div class="level-pick" id="levelPick"></div>
+        <p class="hint">لو عندك مواد من أكثر من مستوى، تقدر تضيفها في الخطوة الجاية.</p>
+      </div>
+
+      <div class="actions">
+        <span class="err" id="err1"></span>
+        <button class="btn primary" id="toStep2">التالي: اختيار المواد ←</button>
+      </div>
+    </section>
+
+    <!-- ========== الخطوة 2 ========== -->
+    <section class="card step" id="step2" hidden>
+      <h2 class="step-title">اختر موادك</h2>
+      <p class="step-sub">مواد مستواك ظاهرة أولا. افتح باقي المستويات لإضافة أي مادة أخرى — منها مواد البرنامج الموجودة في جدولي أمن المعلومات والشبكات.</p>
+
+      <div class="tabs" id="levelTabs" role="tablist"></div>
+      <div class="course-list" id="courseList"></div>
+
+      <div class="summary-bar" id="summaryBar"></div>
+
+      <div class="actions">
+        <button class="btn ghost" data-go="1">→ رجوع</button>
+        <span class="err" id="err2"></span>
+        <button class="btn primary" id="toStep3">التالي ←</button>
+      </div>
+    </section>
+
+    <!-- ========== الخطوة 3 ========== -->
+    <section class="card step" id="step3" hidden>
+      <h2 class="step-title">هل تغير موعد أي محاضرة أو سكشن؟</h2>
+      <p class="step-sub">أحيانا يتفق الدكتور أو المعيد مع الطلاب على موعد مختلف عن الجدول الرسمي. عدله هنا ليظهر صحيحا في جدولك.</p>
+
+      <div class="yesno" id="yesNo">
+        <button class="btn choice" id="noChange">لا، كل المواعيد كما هي</button>
+        <button class="btn choice" id="yesChange">نعم، يوجد موعد تغير</button>
+      </div>
+
+      <div id="changePanel" hidden>
+        <h3 class="sub-title">1) اختر المحاضرة أو السكشن الذي تغير موعده</h3>
+        <div class="session-list" id="sessionList"></div>
+
+        <div class="editor" id="editor" hidden>
+          <h3 class="sub-title">2) الموعد الجديد لـ <span id="editName"></span></h3>
+          <div class="field">
+            <span class="field-label">اليوم</span>
+            <div class="chips" id="dayChips"></div>
+          </div>
+          <div class="field">
+            <span class="field-label">الفترات <small>(اختر فترة، أو حتى 3 فترات متتالية)</small></span>
+            <div class="slot-grid" id="slotChips"></div>
+            <p class="hint" id="slotHint"></p>
+          </div>
+          <label class="field">
+            <span class="field-label">المكان الجديد <small>(اختياري)</small></span>
+            <input type="text" id="newRoom" placeholder="مثال: قاعة 11 أو أونلاين">
+          </label>
+          <div class="actions tight">
+            <button class="btn ghost" id="cancelEdit">إلغاء</button>
+            <button class="btn primary" id="saveEdit">حفظ الموعد الجديد</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn ghost" data-go="2">→ رجوع</button>
+        <button class="btn primary" id="toStep4" hidden>التالي: المعاينة ←</button>
+      </div>
+    </section>
+
+    <!-- ========== الخطوة 4 ========== -->
+    <section class="card step" id="step4" hidden>
+      <h2 class="step-title">جدولك جاهز</h2>
+      <div class="warn" id="conflicts" hidden></div>
+      <div class="preview-frame" id="previewFrame">
+        <div class="preview-scale" id="previewScale"></div>
+      </div>
+      <div class="actions">
+        <button class="btn ghost" data-go="3">→ رجوع</button>
+        <button class="btn ghost" id="printBtn">طباعة</button>
+        <button class="btn primary big" id="pdfBtn">تحميل PDF</button>
+      </div>
+      <p class="hint center" id="pdfStatus"></p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="credit">صنع بحب <span class="heart">♥</span> بواسطة الطالب <b dir="ltr">omarxddz</b></div>
+    <div>المواعيد مأخوذة من الجدول الرسمي للفصل الأول 2026 / 2027، راجع أي موعد مع دكتور المادة.</div>
+  </footer>
+
+  <!-- الصفحة التي تصدر PDF — بنفس تنسيق «الجدول الأسبوعي» -->
+  <div id="printHost" aria-hidden="true"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
